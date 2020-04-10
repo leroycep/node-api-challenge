@@ -29,6 +29,17 @@ router.get("/:id", getProjectById, (req, res) => {
   res.status(200).json(req.project);
 });
 
+router.put("/:id", getProjectById, validateProjectChange, (req, res) => {
+  Projects.update(req.project.id, req.body)
+    .then((project) => {
+      res.status(200).json(project);
+    })
+    .catch((err) => {
+      console.log(`Failed to update project: ${err}`);
+      res.status(500).json({ error: "Failed to update project" });
+    });
+});
+
 function getProjectById(req, res, next) {
   Projects.get(req.params.id)
     .then((project) => {
@@ -51,6 +62,21 @@ function validateProject(req, res, next) {
     res
       .status(400)
       .json({ error: "The fields 'name' and 'description' must be given" });
+  }
+}
+
+function validateProjectChange(req, res, next) {
+  if (
+    req.body.name !== undefined ||
+    req.body.description !== undefined ||
+    req.body.completed !== undefined
+  ) {
+    next();
+  } else {
+    res.status(400).json({
+      error:
+        "One of the fields 'name', 'description', or 'completed' must be given",
+    });
   }
 }
 
