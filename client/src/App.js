@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Switch, Route, useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 import ProjectList from "./components/ProjectList";
 import ProjectPage from "./components/ProjectPage";
@@ -8,6 +9,12 @@ import ProjectForm from "./components/ProjectForm";
 import EditProject from "./components/EditProject";
 
 const API = "http://localhost:10211/api";
+
+const AppContainer = styled.div`
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2%;
+`;
 
 function App() {
   const [projects, setProjects] = useState([]);
@@ -52,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <AppContainer>
       {error && <div>{error}</div>}
       <Switch>
         <Route path="/projects/new">
@@ -66,7 +73,7 @@ function App() {
           <ProjectList projects={projects} />
         </Route>
       </Switch>
-    </div>
+    </AppContainer>
   );
 }
 
