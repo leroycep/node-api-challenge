@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", validateProject, (req, res) => {
   Projects.insert(req.body)
     .then((project) => {
       res.status(201).json(project);
