@@ -3,6 +3,7 @@ import axios from "axios";
 import { Switch, Route } from "react-router-dom";
 
 import ProjectList from "./components/ProjectList";
+import ProjectPage from "./components/ProjectPage";
 
 const API = "http://localhost:10211/api";
 
@@ -24,6 +25,7 @@ function App() {
   return (
     <div>
       <Switch>
+        <Route path="/projects/:id" component={ProjectPage} />
         <Route path="/projects">
           <ProjectList projects={projects} />
         </Route>
