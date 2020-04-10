@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Switch, Route } from "react-router-dom";
 
-import Project from "./components/Project";
+import ProjectList from "./components/ProjectList";
 
 const API = "http://localhost:10211/api";
 
@@ -22,10 +23,11 @@ function App() {
 
   return (
     <div>
-      {error && <div>{JSON.stringify(error)}</div>}
-      {projects.map((project) => (
-        <Project key={project.id} project={project} />
-      ))}
+      <Switch>
+        <Route path="/projects">
+          <ProjectList projects={projects} />
+        </Route>
+      </Switch>
     </div>
   );
 }
