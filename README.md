@@ -21,12 +21,12 @@ The Minimum Viable Product must be completed in three hours.
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Add your _Team Lead_ as collaborator on Github.
-- [ ] Clone your forked version of the Repository.
-- [ ] Create a new Branch on the clone: git checkout -b `firstName-lastName`.
-- [ ] Implement the project on this Branch, committing changes regularly.
-- [ ] Push commits: git push origin `firstName-lastName`.
+- [x] Create a forked copy of this project.
+- [x] Add your _Team Lead_ as collaborator on Github.
+- [x] Clone your forked version of the Repository.
+- [x] Create a new Branch on the clone: git checkout -b `firstName-lastName`.
+- [x] Implement the project on this Branch, committing changes regularly.
+- [x] Push commits: git push origin `firstName-lastName`.
 
 Follow these steps for completing your project.
 
@@ -49,15 +49,41 @@ following free-form questions. Edit this document to include your answers after
 each question. Make sure to leave a blank line above and below your answer so it
 is clear and easy to read by your Team Lead.
 
-- [ ] Mention two parts of Express that you learned about this week.
+- [x] Mention two parts of Express that you learned about this week.
 
-- [ ] Describe Middleware?
+  - Middleware is used transfrom requests and responses that the server
+    receives.
+  - Routing is provided by Express.js, and it makes it easy to create new routes
+    by providing it a name and HTTP method.
 
-- [ ] Describe a Resource?
+- [x] Describe Middleware?
 
-- [ ] What can the API return to help clients know if a request was successful?
+  - Middleware is used transfrom requests and responses that the server
+    receives. Each middleware is called in turn, and decides whether to continue
+    calling the next, or if it should return an error. Middleware can be used
+    for everything from authentication to logging.
 
-- [ ] How can we partition our application into sub-applications?
+- [x] Describe a Resource?
+
+  - For the purposes of making a REST API, a resource is a piece of data that
+    can be manipulated using CRUD (Create, Read, Update, Delete).
+
+- [x] What can the API return to help clients know if a request was successful?
+
+  - HTTP response codes let the user know the status of a request. For example,
+    status code `200` means a request was successful, `404` means that the given
+    resource could not be found, and `500` means that there was an internal
+    server error.
+  - HTTP response codes are broken into categories by their most significant
+    digits.
+    - `2xx` status codes indicate different types of success.
+    - `4xx` status codes indicate user error.
+    - `5xx` status codes indicate a server side error that is not the
+      responsibility of the user.
+
+- [x] How can we partition our application into sub-applications?
+
+  - We can partition our application into sub-applications using routers
 
 ## Minimum Viable Product
 
@@ -69,11 +95,11 @@ is clear and easy to read by your Team Lead.
 
 Design and build the necessary endpoints to:
 
-- [ ] Perform CRUD operations on _projects_ and _actions_. When adding an
+- [x] Perform CRUD operations on _projects_ and _actions_. When adding an
       action, make sure the `project_id` provided belongs to an existing
       `project`. If you try to add an action with an `id` of 3 and there is no
       project with that `id` the database will return an error.
-- [ ] Retrieve the list of actions for a project.
+- [x] Retrieve the list of actions for a project.
 
 Please read the following sections before implementing the Minimum Viable
 Product, they describe how the database is structured and the files and methods
