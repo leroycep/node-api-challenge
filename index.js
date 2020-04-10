@@ -16,10 +16,12 @@ const express = require("express");
 
 const port = process.env.PORT || 10211;
 const projects_router = require("./projects/router.js");
+const actions_router = require("./actions/router.js");
 
 const server = express();
 server.use(express.json());
 server.use("/api/projects", projects_router);
+server.use("/api/actions", actions_router);
 
 server.listen(port, () =>
   console.log(` == server listening on port ${port} == `)
