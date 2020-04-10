@@ -14,6 +14,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  Projects.insert(req.body)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      console.log(`Failed to insert project: ${err}`);
+      res.status(500).json({ error: "Could not insert project" });
+    });
+});
+
 router.get("/:id", getProjectById, (req, res) => {
   res.status(200).json(req.project);
 });
@@ -31,6 +42,16 @@ function getProjectById(req, res, next) {
     .catch((err) => {
       res.status(500).json({ error: "Could not retrieve projects data" });
     });
+}
+
+function validateProject(req, res, next) {
+  if (req.body.name !== undefined && req.body.description !== undefined) {
+    next();
+  } else {
+    res
+      .status(400)
+      .json({ error: "The fields 'name' and 'description' must be given" });
+  }
 }
 
 module.exports = router;
