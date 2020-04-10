@@ -40,6 +40,21 @@ router.put("/:id", getProjectById, validateProjectChange, (req, res) => {
     });
 });
 
+router.delete("/:id", getProjectById, (req, res) => {
+  Projects.remove(req.project.id)
+    .then((num_deleted) => {
+      if (num_deleted > 0) {
+        res.status(200).json(req.project);
+      } else {
+        res.status(500).json({ error: "Failed to delete project" });
+      }
+    })
+    .catch((err) => {
+      console.log(`Failed to delete project: ${err}`);
+      res.status(500).json({ error: "Failed to delete project" });
+    });
+});
+
 function getProjectById(req, res, next) {
   Projects.get(req.params.id)
     .then((project) => {
