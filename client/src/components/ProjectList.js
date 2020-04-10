@@ -1,13 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Project from "./Project";
 
 function ProjectList({ projects }) {
   return (
     <div>
-      {projects.map((project) => (
-        <Project key={project.id} project={project} />
-      ))}
+      <Link to="/projects/new">New Project</Link>
+      <div>
+        {projects.map((project) => (
+          <Project key={project.id} project={project} />
+        ))}
+      </div>
     </div>
   );
 }
