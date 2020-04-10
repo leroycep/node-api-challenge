@@ -21,11 +21,15 @@ router.get("/:id", getProjectById, (req, res) => {
 function getProjectById(req, res, next) {
   Projects.get(req.params.id)
     .then((project) => {
-      req.project = project;
-      next();
+      if (project !== null) {
+        req.project = project;
+        next();
+      } else {
+        res.status(404).json({ error: "No project with the specified id" });
+      }
     })
     .catch((err) => {
-      res.status(404).json({ error: "No project with the specified id" });
+      res.status(500).json({ error: "Could not retrieve projects data" });
     });
 }
 
