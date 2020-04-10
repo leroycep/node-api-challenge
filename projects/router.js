@@ -14,4 +14,19 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", getProjectById, (req, res) => {
+  res.status(200).json(req.project);
+});
+
+function getProjectById(req, res, next) {
+  Projects.get(req.params.id)
+    .then((project) => {
+      req.project = project;
+      next();
+    })
+    .catch((err) => {
+      res.status(404).json({ error: "No project with the specified id" });
+    });
+}
+
 module.exports = router;
