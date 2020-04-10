@@ -5,6 +5,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import ProjectList from "./components/ProjectList";
 import ProjectPage from "./components/ProjectPage";
 import ProjectForm from "./components/ProjectForm";
+import EditProject from "./components/EditProject";
 
 const API = "http://localhost:10211/api";
 
@@ -31,6 +32,21 @@ function App() {
       .catch((err) => setError(err));
   };
 
+  const putProject = (id, values) => {
+    axios
+      .put(`${API}/projects/${id}`, values)
+      .then((res) => {
+        const updated = res.data;
+        setProjects(
+          projects.map((project) =>
+            project.id === updated.id ? updated : project
+          )
+        );
+        history.push(`/projects/${res.data.id}`);
+      })
+      .catch((err) => setError(err));
+  };
+
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -41,6 +57,9 @@ function App() {
       <Switch>
         <Route path="/projects/new">
           <ProjectForm onSubmit={addProject} />
+        </Route>
+        <Route path="/projects/:id/edit">
+          <EditProject projects={projects} putProject={putProject} />
         </Route>
         <Route path="/projects/:id" component={ProjectPage} />
         <Route path="/projects">

@@ -5,7 +5,8 @@ function Project(props) {
   return (
     <div>
       <h3>
-        <Link to={`/projects/${props.project.id}`}>{props.project.name}</Link>
+        <Link to={`/projects/${props.project.id}`}>{props.project.name}</Link>{" "}
+        <Link to={`/projects/${props.project.id}/edit`}>[edit]</Link>
       </h3>
       <p>{props.project.description}</p>
       {props.project.completed ? "Complete" : "Not yet complete"}
